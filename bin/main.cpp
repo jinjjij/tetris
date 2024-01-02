@@ -1,10 +1,19 @@
 #include "../lib/graphics.h"
-#include <iostream>
 
 
 int main(void){
     ConsoleGraphics cg = ConsoleGraphics();
-    cg.SetSize(11, 19);
-    std::cout << cg.test();
+
+    for(int i=0;i<1000;i++){
+        //int tpf = cg.getTimePerFrame();
+        //std::string tpf_str = "tpf : ";
+        //tpf_str.append(std::to_string(tpf));
+        /*
+        for(int i=0;i<tpf_str.length();i++){
+            cg.setPixel(5+i,5,tpf_str[i]);
+        }
+        */
+        //cg.Render();
+    }
     return 0;
 }
