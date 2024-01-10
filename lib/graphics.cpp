@@ -4,8 +4,7 @@
 // constructor
 ConsoleGraphics::ConsoleGraphics(){
     // default settings
-    ConsoleGraphics::consoleX = 100;
-    ConsoleGraphics::consoleY = 50;
+    SetConsoleSize(100, 50);
     ConsoleGraphics::offsetX = 2;
     ConsoleGraphics::offsetY = 1;
     ConsoleGraphics::bufferX = 96;
@@ -24,7 +23,7 @@ ConsoleGraphics::ConsoleGraphics(){
 void ConsoleGraphics::SetConsoleSize(int width, int height){
     ConsoleGraphics::consoleX = width;
     ConsoleGraphics::consoleY = height;
-    std::string sysString = "mode CON: lines=" + std::to_string(consoleX) + " cols=" + std::to_string(consoleY);
+    std::string sysString = "mode CON: lines=" + std::to_string(consoleY) + " cols=" + std::to_string(consoleX);
     std::system(sysString.c_str()); 
 }
 
@@ -56,14 +55,14 @@ void ConsoleGraphics::Render(){
     int buffer_x = ConsoleGraphics::bufferX;
     int buffer_y = ConsoleGraphics::bufferY;
 
-    int right_padding = buffer_x - offset_x - buffer_x;
+    int right_padding = console_x - offset_x - buffer_x;
 
     // render area buffer
     char** chrbuf = ConsoleGraphics::charBuffer;
     
     
     // make string for cout : apply padding(offset)
-    std::string renderString;
+    std::string renderString = "";
 
     for(int y=0;y<console_y;y++){
         if(y<offset_y){
@@ -115,6 +114,12 @@ void ConsoleGraphics::createBuffer(){
 
     for (int i = 0; i < ConsoleGraphics::bufferY; ++i) {
         ConsoleGraphics::charBuffer[i] = new char[ConsoleGraphics::bufferX];   // 두 번째 차원의 메모리 할당
+    }
+
+    for(int i=0;i<ConsoleGraphics::bufferY;i++){
+        for(int j=0;j<ConsoleGraphics::bufferX;j++){
+            ConsoleGraphics::charBuffer[i][j] = ' ';
+        }
     }
 }
 
